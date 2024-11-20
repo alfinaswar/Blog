@@ -34,24 +34,25 @@
                                         <td>{{ $item->Judul }}</td>
                                         <td>{{ $item->getkategori->Nama }}</td>
 
-                                        <td>{{ $item->getPenulis->name }}</td>
+                                        <td> <span
+                                                class="badge
+        @if (auth()->user()->id == '1') bg-success
+        @else
+            bg-warning @endif">
+                                                {{ $item->getPenulis->name }}
+                                            </span></td>
                                         <td>
-                                            @if ($item->Status == 'Terbit')
-                                                <span class="badge light badge-success text-dark">
-                                                    <i class="fa fa-circle text-success me-1"></i>
-                                                    Telah Terbit
-                                                </span>
-                                            @elseif ($item->Status == 'Draft')
-                                                <span class="badge light badge-warning text-dark">
-                                                    <i class="fa fa-circle text-warning me-1"></i>
-                                                    Draft
-                                                </span>
-                                            @else
-                                                <span class="badge light badge-danger text-dark">
-                                                    <i class="fa fa-circle text-danger me-1"></i>
-                                                    Ditolak
-                                                </span>
-                                            @endif
+                                            <form action="{{ route('updateStatus', $item->id) }}" method="POST">
+                                                @csrf
+                                                @method('PUT')
+                                                <select name="Status" class="default-select wide form-control"
+                                                    onchange="this.form.submit()">
+                                                    <option value="Terbit"
+                                                        {{ $item->Status == 'Terbit' ? 'selected' : '' }}>Terbitkan</option>
+                                                    <option value="Draft" {{ $item->Status == 'Draft' ? 'selected' : '' }}>
+                                                        Draft</option>
+                                                </select>
+                                            </form>
                                         </td>
                                         <td><img src="{{ asset('storage/Gambar/' . $item->Gambar) }}"
                                                 style="width: 150px; height: 150px; object-fit: cover;"></td>
@@ -59,15 +60,14 @@
                                                 title="Edit">
                                                 <i class="fas fa-edit"></i>
                                             </a>
-                                            <form action="{{ route('post.destroy', $item->id) }}" method="POST"
-                                                class="d-inline"
-                                                onsubmit="return confirm('Apakah Anda yakin ingin menghapus artikel ini?');">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="btn btn-danger btn-sm" title="Delete">
-                                                    <i class="fas fa-trash"></i>
-                                                </button>
-                                            </form>
+                                            <button type="button" class="btn btn-danger btn-sm btn-delete"
+                                                data-id="{{ $item->id }}" data-title="{{ $item->Judul }}">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                            <button type="button" class="btn btn-warning btn-sm btn-feature"
+                                                data-id="{{ $item->id }}" data-title="{{ $item->Judul }}">
+                                                <i class="fas fa-star"></i>
+                                            </button>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -95,49 +95,142 @@
             }, 1000);
         </script>
     @endif
-    <script>
-        @push('scripts')
-            $(document).ready(function() {
-                        $('body').on('click', '.btn-delete', function() {
-                            var id = $(this).data('id');
-
-                            Swal.fire({
-                                title: 'Hapus Data',
-                                text: "Anda Ingin Menghapus Data?",
-                                icon: 'Peringatan',
-                                showCancelButton: true,
-                                confirmButtonText: 'Ya, Hapus'
-                            }).then((result) => {
-                                if (result.isConfirmed) {
-                                    $.ajax({
-                                        url: '{{ route('post.destroy', ':id') }}'.replace(
-                                            ':id',
-                                            id),
-                                        type: 'DELETE',
-                                        data: {
-                                            _token: '{{ csrf_token() }}'
-                                        },
-                                        success: function(response) {
-                                            Swal.fire(
-                                                'Dihapus',
-                                                'Data Berhasil Dihapus',
-                                                'success'
-                                            );
-
-                                            $('#example').DataTable().ajax.reload();
-                                        },
-                                        error: function(xhr) {
-                                            Swal.fire(
-                                                'Failed!',
-                                                'Error',
-                                                'error'
-                                            );
-                                            console.log(xhr.responseText);
-                                        }
-                                    });
-                                }
-                            });
-                        });
-                    @endpush
-    </script>
 @endsection
+@push('scripts')
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Event listener untuk tombol "Pilih Artikel Editor"
+            document.querySelectorAll('.btn-feature').forEach(button => {
+                button.addEventListener('click', function() {
+                    const postId = this.dataset.id;
+                    const postTitle = this.dataset.title;
+                    Swal.fire({
+                        title: `Jadikan "${postTitle}" sebagai Artikel Editor?`,
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'Ya, pilih!',
+                        cancelButtonText: 'Batal'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            fetch(`/update-tipe/${postId}`, {
+                                    method: 'PUT',
+                                    headers: {
+                                        'X-CSRF-TOKEN': document
+                                            .querySelector(
+                                                'meta[name="csrf-token"]')
+                                            .getAttribute('content'),
+                                        'Content-Type': 'application/json'
+                                    },
+                                    body: JSON.stringify({
+                                        tipe: 'PilihanEditor'
+                                    })
+                                })
+                                .then(response => response.json())
+                                .then(data => {
+                                    if (data.success) {
+                                        Swal.fire(
+                                            'Berhasil!',
+                                            `Artikel "${postTitle}" telah dijadikan Artikel Editor.`,
+                                            'success'
+                                        );
+                                        setTimeout(() => {
+                                            location.reload();
+                                        }, 1200);
+                                    } else {
+                                        Swal.fire(
+                                            'Gagal!',
+                                            'Terjadi kesalahan saat memperbarui data.',
+                                            'error'
+                                        );
+                                    }
+                                })
+                                .catch(error => {
+                                    Swal.fire(
+                                        'Gagal!',
+                                        'Tidak dapat terhubung ke server.',
+                                        'error'
+                                    );
+                                });
+                        }
+                    });
+                });
+            });
+        });
+        $(document).ready(function() {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $('.btn-delete').on('click', function() {
+                let id = $(this).data('id');
+                let title = $(this).data('title');
+                let deleteButton = $(this);
+
+                Swal.fire({
+                    title: 'Apakah anda yakin?',
+                    text: `Akan menghapus postingan "${title}"?`,
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#d33',
+                    cancelButtonColor: '#3085d6',
+                    confirmButtonText: 'Ya, hapus!',
+                    cancelButtonText: 'Batal',
+                    reverseButtons: true
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // Show loading state
+                        Swal.fire({
+                            title: 'Menghapus...',
+                            html: 'Mohon tunggu sebentar',
+                            allowOutsideClick: false,
+                            didOpen: () => {
+                                Swal.showLoading();
+                            }
+                        });
+
+                        // Send delete request
+                        $.ajax({
+                            url: `/post/${id}`,
+                            type: 'DELETE',
+                            success: function(response) {
+                                // Remove the table row with animation
+                                deleteButton.closest('tr').fadeOut(function() {
+                                    $(this).remove();
+
+                                    // Check if table is empty
+                                    if ($('table tbody tr').length === 0) {
+                                        $('table tbody').append(
+                                            '<tr><td colspan="6" class="text-center">Tidak ada data</td></tr>'
+                                        );
+                                    }
+                                });
+
+                                // Show success message
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: 'Berhasil!',
+                                    text: 'Postingan berhasil dihapus',
+                                    timer: 1500,
+                                    showConfirmButton: false
+                                });
+                            },
+                            error: function(xhr) {
+                                // Show error message
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Oops...',
+                                    text: xhr.responseJSON?.message ||
+                                        'Terjadi kesalahan saat menghapus postingan'
+                                });
+                            }
+                        });
+                    }
+                });
+            });
+
+        });
+    </script>
+@endpush

@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Kategori;
+use App\Models\Post;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
@@ -24,6 +27,16 @@ class HomeController extends Controller
      */
     public function index(): View
     {
-        return view('home');
+        $Editor = Post::where('Tipe', 'PilihanEditor')->get();
+        $TotalPost = Post::count();
+        $TotalUser = User::count();
+        $TotalKategori = Kategori::count();
+        $PostFromUser = Post::where('GuestPost', 'Y')->count();
+        $Recent = Post::get()->take(10);
+        return view('home', compact(
+            'TotalPost',
+            'TotalUser',
+            'Recent', 'PostFromUser', 'TotalKategori', 'Editor'
+        ));
     }
 }

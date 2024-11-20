@@ -36,7 +36,9 @@
 
     <link href="{{ asset('') }}assets/css/style.css" rel="stylesheet">
     <link href="{{ asset('') }}assets/css/custom.css" rel="stylesheet">
-
+    <script src="{{ asset('') }}assets/vendor/peity/jquery.peity.min.js"></script>
+    <script src="{{ asset('') }}assets/js/plugins-init/piety-init.js"></script>
+    <script src="{{ asset('') }}assets/js/plugins-init/widgets-script-init.js"></script>
     {{-- Select 2 --}}
     <link rel="stylesheet" href="{{ asset('') }}assets/vendor/select2/css/select2.min.css">
 
@@ -83,7 +85,19 @@
         Main wrapper start
     ***********************************-->
     <div id="main-wrapper">
+        <div class="nav-header">
+            <a href="{{ route('home') }}" class="brand-logo">
+                <img src="{{ asset('assets/images/logo/circle-logo.png') }}" class="logo-abbr">
+                <img src="{{ asset('assets/images/logo/main-logo.png') }}" class="brand-title" height="100%">
 
+
+            </a>
+            <div class="nav-control">
+                <div class="hamburger">
+                    <span class="line"></span><span class="line"></span><span class="line"></span>
+                </div>
+            </div>
+        </div>
         <!--**********************************
             Nav header start
         ***********************************-->
@@ -95,13 +109,7 @@
                             <div class="dashboard_bar">
                                 Dashboard
                             </div>
-                            {{-- <div class="nav-item d-flex align-items-center">
-								<div class="input-group search-area">
-									<input type="text" class="form-control" placeholder="Search">
-									<span class="input-group-text"><a href="javascript:void(0)"><i class="flaticon-381-search-2"></i></a></span>
-								</div>
 
-							</div> --}}
                         </div>
                         <ul class="navbar-nav header-right">
                             <li class="nav-item dropdown header-profile">
@@ -162,18 +170,13 @@
                             <span class="nav-text">Dashboard</span>
                         </a>
                     </li>
-                    <li class="{{ Request::segment(1) == 'home' ? 'active' : '' }}">
-                        <a class="" href="{{ route('post.index') }}" aria-expanded="true">
+                    <li>
+                        <a class="" href="{{ route('post.index') }}">
                             <i class="flaticon-025-dashboard"></i>
-                            <span class="nav-text">Posingan</span>
+                            <span class="nav-text">Berita / Postingan</span>
                         </a>
                     </li>
-                    <li class="{{ Request::segment(1) == 'home' ? 'active' : '' }}">
-                        <a class="" href="{{ route('home') }}" aria-expanded="true">
-                            <i class="flaticon-025-dashboard"></i>
-                            <span class="nav-text">Artikel User</span>
-                        </a>
-                    </li>
+
                     <li><a class="has-arrow " href="javascript:void()" aria-expanded="false">
                             <i class="flaticon-093-waving"></i>
                             <span class="nav-text">Master</span>
@@ -218,7 +221,7 @@
         ***********************************-->
         <div class="footer">
             <div class="copyright">
-                <p>KALIBRASI ALAT &amp; Developed by Alfin 2024</p>
+                <p>Website Blog Berita Terbaik</p>
             </div>
         </div>
         <!--**********************************
@@ -294,8 +297,9 @@
 <script src="{{ asset('') }}assets/js/plugins-init/material-date-picker-init.js"></script>
 <!-- Pickdate -->
 <script src="{{ asset('') }}assets/js/plugins-init/pickadate-init.js"></script>
-<script src="{{ asset('') }}assets/js/customdkh.js"></script>
+
 <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+<script src="{{ asset('') }}assets/js/dashboard/dashboard-1.js"></script>
 
 </body>
 
