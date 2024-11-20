@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Kategori;
 use App\Models\Post;
 use Illuminate\Http\Request;
 
@@ -12,7 +13,8 @@ class PostController extends Controller
      */
     public function index()
     {
-        //
+        $data = Post::with('getPenulis', 'getKategori')->get();
+        return view('post.index', compact('data'));
     }
 
     /**
@@ -20,7 +22,8 @@ class PostController extends Controller
      */
     public function create()
     {
-        //
+        $kategori = Kategori::all();
+        return view('post.create', compact('kategori'));
     }
 
     /**
@@ -28,7 +31,16 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+        if ($request->hasFile('Gambar')) {
+            $file = $request->file('Gambar');
+            $file->storeAs('public/Gambar', $file->getClientOriginalName());
+            $data['Gambar'] = $file->getClientOriginalName();
+        }
+        $data['Penulis'] = auth()->user()->id;
+
+        Post::create($data);
+        return redirect()->route('post.index')->with('success', 'Postingan Berhasil Disimpan');
     }
 
     /**
@@ -42,9 +54,11 @@ class PostController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Post $post)
+    public function edit($id)
     {
-        //
+        $post = Post::findOrFail($id);
+        $kategori = Kategori::all();
+        return view('post.edit', compact('post', 'kategori'));
     }
 
     /**

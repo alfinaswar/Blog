@@ -295,6 +295,7 @@
 <!-- Pickdate -->
 <script src="{{ asset('') }}assets/js/plugins-init/pickadate-init.js"></script>
 <script src="{{ asset('') }}assets/js/customdkh.js"></script>
+<script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
 
 </body>
 

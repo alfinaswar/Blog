@@ -27,8 +27,10 @@ class KaegoriController extends Controller
         $request->validate([
             'Nama' => 'required',
         ]);
-
+        $namaArray = explode(' ', $request->Nama);
+        $namaDenganStrip = implode('-', $namaArray);
         Kategori::create([
+            'KategoriID' => $namaDenganStrip,
             'Nama' => $request->Nama,
         ]);
 
@@ -47,9 +49,11 @@ class KaegoriController extends Controller
         $request->validate([
             'Nama' => 'required',
         ]);
-
+        $namaArray = explode(' ', $request->Nama);
+        $namaDenganStrip = implode('-', $namaArray);
         $Kategori = Kategori::find($id);
         $Kategori->update([
+            'KategoriID' => $namaDenganStrip,
             'Nama' => $request->Nama,
         ]);
 
