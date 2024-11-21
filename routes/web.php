@@ -26,7 +26,7 @@ Auth::routes();
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::GET('/artikel-tamu/{Kategori}', [HomeController::class, 'BeritaKategori'])->name('home.BeritaKategori');
-Route::GET('/detail/{id}', [HomeController::class, 'BeritaShow'])->name('home.BeritaShow');
+Route::GET('/detail/{id}', [Controller::class, 'BeritaShow'])->name('home.BeritaShow');
 
 Route::group(['middleware' => ['auth']], function () {
     Route::resource('kategori', KaegoriController::class);
