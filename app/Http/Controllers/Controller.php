@@ -19,6 +19,7 @@ class Controller extends BaseController
         $recent = Post::with('getPenulis', 'getKategori')->latest()->get()->take(5);
         $random = Post::with('getPenulis', 'getKategori')->inRandomOrder()->take(3)->get();
         $editor = Post::with('getPenulis', 'getKategori')->where('Tipe', 'PilihanEditor')->latest()->get()->take(6);
+
         return view('welcome', compact('kategori', 'latestartikel', 'recent', 'random', 'editor'));
     }
 
@@ -26,5 +27,17 @@ class Controller extends BaseController
     {
         $data = Post::where('KategoriID', $Kategori)->get();
         return view('BeritaKategori', compact('data'));
+    }
+    public function BeritaShow($id)
+    {
+        $kategori = Kategori::get();
+        $latestartikel = Post::with('getPenulis', 'getKategori')->latest()->first();
+        $recent = Post::with('getPenulis', 'getKategori')->latest()->get()->take(5);
+        $random = Post::with('getPenulis', 'getKategori')->inRandomOrder()->take(3)->get();
+        $editor = Post::with('getPenulis', 'getKategori')->where('Tipe', 'PilihanEditor')->latest()->get()->take(6);
+
+        $data = Post::where('id', $id)->get();
+        return view('BeritaSHow', compact('kategori', 'latestartikel', 'recent', 'random', 'editor'));
+        // return view('BeritaSHow', compact('data'));
     }
 }

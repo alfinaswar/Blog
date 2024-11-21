@@ -8,7 +8,7 @@
                     <img src="{{ asset('storage/Gambar/' . $latestartikel->Gambar) }}" alt="">
                     <div class="trend-top-cap">
                         <span>{{ $latestartikel->getKategori->Nama }}</span>
-                        <h2><a href="details.html">{{ $latestartikel->Judul }}</a></h2>
+                        <h2><a href="{{ route('home.BeritaShow', $latestartikel->id) }}">{{ $latestartikel->Judul }}</a></h2>
                     </div>
                 </div>
             </div>
@@ -23,7 +23,7 @@
                                 </div>
                                 <div class="trend-bottom-cap">
                                     <span class="color1">{{ $acak->getKategori->Gambar }}</span>
-                                    <h4><a href="{{ route('post.show', $acak->id) }}">{{ $acak->Judul }}</a></h4>
+                                    <h4><a href="{{ route('home.BeritaShow', $acak->id) }}">{{ $acak->Judul }}</a></h4>
                                 </div>
                             </div>
                         </div>
@@ -42,7 +42,7 @@
                     </div>
                     <div class="trand-right-cap">
                         <span class="color1">{{ $postterbaru->getKategori->Nama }}</span>
-                        <h4><a href="{{ route('post.show', $postterbaru->id) }}">{{ $postterbaru->Judul }}</a></h4>
+                        <h4><a href="{{ route('home.BeritaShow', $postterbaru->id) }}">{{ $postterbaru->Judul }}</a></h4>
                     </div>
                 </div>
             @endforeach
@@ -63,15 +63,20 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="recent-active dot-style d-flex dot-style">
-                            <div class="single-recent mb-100">
-                                <div class="what-img">
-                                    <img src="{{ asset('storage/Gambar/' . $editor) }}" alt="">
+                            @foreach ($editor as $item)
+                                <div class="single-recent mb-100">
+                                    <div class="what-img">
+                                        <img src="{{ asset('storage/Gambar/' . $item->Gambar) }}" alt="">
+                                    </div>
+                                    <div class="what-cap">
+                                        <span class="color1">{{ $item->getKategori->Nama }}</span>
+                                        <h4><a href="{{ route('home.BeritaShow', $item->id) }}">{{ $item->Judul }}</a>
+                                        </h4>
+                                    </div>
                                 </div>
-                                <div class="what-cap">
-                                    <span class="color1">{{ $editor }}</span>
-                                    <h4><a href="#">Welcome To The Best Model Winner Contest</a></h4>
-                                </div>
-                            </div>
+                            @endforeach
+
+
                         </div>
                     </div>
                 </div>
@@ -85,55 +90,31 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="section-tittle mb-30">
-                            <h3>Recent Articles</h3>
+                            <h3>Pilihan Editor</h3>
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-12">
                         <div class="recent-active dot-style d-flex dot-style">
-                            <div class="single-recent mb-100">
-                                <div class="what-img">
-                                    <img src="{{ asset('') }}assets-berita/img/news/recent1.jpg" alt="">
+                            @foreach ($editor as $item)
+                                <div class="single-recent mb-100">
+                                    <div class="what-img">
+                                        <img src="{{ asset('storage/Gambar/' . $item->Gambar) }}" alt="">
+                                    </div>
+                                    <div class="what-cap">
+                                        <span class="color1">{{ $item->getKategori->Nama }}</span>
+                                        <h4><a href="{{ route('home.BeritaShow', $item->id) }}">{{ $item->Judul }}</a>
+                                        </h4>
+                                    </div>
                                 </div>
-                                <div class="what-cap">
-                                    <span class="color1">Night party</span>
-                                    <h4><a href="#">Welcome To The Best Model Winner Contest</a></h4>
-                                </div>
-                            </div>
-                            <div class="single-recent mb-100">
-                                <div class="what-img">
-                                    <img src="{{ asset('') }}assets-berita/img/news/recent2.jpg" alt="">
-                                </div>
-                                <div class="what-cap">
-                                    <span class="color1">Night party</span>
-                                    <h4><a href="#">Welcome To The Best Model Winner Contest</a></h4>
-                                </div>
-                            </div>
-                            <div class="single-recent mb-100">
-                                <div class="what-img">
-                                    <img src="{{ asset('') }}assets-berita/img/news/recent3.jpg" alt="">
-                                </div>
-                                <div class="what-cap">
-                                    <span class="color1">Night party</span>
-                                    <h4><a href="#">Welcome To The Best Model Winner Contest</a></h4>
-                                </div>
-                            </div>
-                            <div class="single-recent mb-100">
-                                <div class="what-img">
-                                    <img src="{{ asset('') }}assets-berita/img/news/recent2.jpg" alt="">
-                                </div>
-                                <div class="what-cap">
-                                    <span class="color1">Night party</span>
-                                    <h4><a href="#">Welcome To The Best Model Winner Contest</a></h4>
-                                </div>
-                            </div>
+                            @endforeach
+
+
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <!--Recent Articles End -->
-    <!--Start pagination -->
 @endsection
