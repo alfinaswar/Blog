@@ -176,22 +176,23 @@
                             <span class="nav-text">Berita / Postingan</span>
                         </a>
                     </li>
+                    @if (auth()->user()->name == 'Administrator')
+                        <li><a class="has-arrow " href="javascript:void()" aria-expanded="false">
+                                <i class="flaticon-093-waving"></i>
+                                <span class="nav-text">Master</span>
+                            </a>
+                            <ul aria-expanded="false">
+                                <li class="{{ Request::segment(1) == 'users' ? 'active' : '' }}"><a
+                                        href="{{ route('users.index') }}">
+                                        Manajemen User</a></li>
 
-                    <li><a class="has-arrow " href="javascript:void()" aria-expanded="false">
-                            <i class="flaticon-093-waving"></i>
-                            <span class="nav-text">Master</span>
-                        </a>
-                        <ul aria-expanded="false">
-                            <li class="{{ Request::segment(1) == 'users' ? 'active' : '' }}"><a
-                                    href="{{ route('users.index') }}">
-                                    Manajemen User</a></li>
-
-                            <li class="{{ Request::segment(1) == 'kategori' ? 'active' : '' }}"><a
-                                    href="{{ route('kategori.index') }}">Data Kategori</a></li>
+                                <li class="{{ Request::segment(1) == 'kategori' ? 'active' : '' }}"><a
+                                        href="{{ route('kategori.index') }}">Data Kategori</a></li>
 
 
-                        </ul>
-                    </li>
+                            </ul>
+                        </li>
+                    @endif
 
                 </ul>
 

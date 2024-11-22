@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Kategori;
 use App\Models\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Storage;
 
 class PostController extends Controller
@@ -14,8 +15,17 @@ class PostController extends Controller
      */
     public function index()
     {
-        $data = Post::with('getPenulis', 'getKategori')->get();
-        return view('post.index', compact('data'));
+
+        if (Auth::check()) {
+            if (Auth::user()->hasRole('Admin')) {
+
+                $data = Post::with('getPenulis', 'getKategori')->get();
+            } else {
+                $data = Post::with('getPenulis', 'getKategori')->where('Penulis', auth()->user()->id)->get();
+            }
+            // dd($data);
+            return view('post.index', compact('data'));
+        }
     }
 
     /**
@@ -32,15 +42,33 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->all();
-        if ($request->hasFile('Gambar')) {
-            $file = $request->file('Gambar');
-            $file->storeAs('public/Gambar', $file->getClientOriginalName());
-            $data['Gambar'] = $file->getClientOriginalName();
-        }
-        $data['Penulis'] = auth()->user()->id;
+        if (Auth::check()) {
+            if (Auth::user()->hasRole('Admin')) {
+                $data = $request->all();
+                if ($request->hasFile('Gambar')) {
+                    $file = $request->file('Gambar');
+                    $file->storeAs('public/Gambar', $file->getClientOriginalName());
+                    $data['Gambar'] = $file->getClientOriginalName();
+                }
+                $data['Penulis'] = auth()->user()->id;
 
-        Post::create($data);
+                Post::create($data);
+            } else {
+                $data = $request->all();
+                if ($request->hasFile('Gambar')) {
+                    $file = $request->file('Gambar');
+                    $file->storeAs('public/Gambar', $file->getClientOriginalName());
+                    $data['Gambar'] = $file->getClientOriginalName();
+                }
+                $data['Penulis'] = auth()->user()->id;
+                $data['GuestPost'] = 'Y';
+                $data['Status'] = 'Draft';
+
+                Post::create($data);
+            }
+            return redirect()->back()->with('success', 'Data Berhasil Disimpan');
+        }
+
         return redirect()->route('post.index')->with('success', 'Postingan Berhasil Disimpan');
     }
 

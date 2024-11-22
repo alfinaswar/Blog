@@ -42,20 +42,29 @@
                                                 {{ $item->getPenulis->name }}
                                             </span></td>
                                         <td>
-                                            <form action="{{ route('updateStatus', $item->id) }}" method="POST">
-                                                @csrf
-                                                @method('PUT')
-                                                <select name="Status" class="default-select wide form-control"
-                                                    onchange="this.form.submit()">
-                                                    <option value="Terbit"
-                                                        {{ $item->Status == 'Terbit' ? 'selected' : '' }}>Terbitkan</option>
-                                                    <option value="Draft" {{ $item->Status == 'Draft' ? 'selected' : '' }}>
-                                                        Draft</option>
-                                                </select>
-                                            </form>
+                                            @if (Auth::user()->hasRole('Admin'))
+                                                <form action="{{ route('updateStatus', $item->id) }}" method="POST">
+                                                    @csrf
+                                                    @method('PUT')
+                                                    <select name="Status" class="default-select wide form-control"
+                                                        onchange="this.form.submit()">
+                                                        <option value="Terbit"
+                                                            {{ $item->Status == 'Terbit' ? 'selected' : '' }}>Terbitkan
+                                                        </option>
+                                                        <option value="Draft"
+                                                            {{ $item->Status == 'Draft' ? 'selected' : '' }}>Draft</option>
+                                                    </select>
+                                                </form>
+                                            @else
+                                                <label>Status: {{ $item->Status }}</label>
+                                            @endif
                                         </td>
-                                        <td><img src="{{ asset('storage/Gambar/' . $item->Gambar) }}"
-                                                style="width: 150px; height: 150px; object-fit: cover;"></td>
+
+                                        <td>
+                                            @if (Auth::user()->hasRole('Admin'))
+                                                <img src="{{ asset('storage/Gambar/' . $item->Gambar) }}"
+                                                    style="width: 150px; height: 150px; object-fit: cover;">
+                                        </td>
                                         <td> <a href="{{ route('post.edit', $item->id) }}" class="btn btn-primary btn-sm"
                                                 title="Edit">
                                                 <i class="fas fa-edit"></i>
@@ -68,8 +77,17 @@
                                                 data-id="{{ $item->id }}" data-title="{{ $item->Judul }}">
                                                 <i class="fas fa-star"></i>
                                             </button>
+                                        @else
+                                            <img src="{{ asset('storage/Gambar/' . $item->Gambar) }}"
+                                                style="width: 150px; height: 150px; object-fit: cover;">
                                         </td>
-                                    </tr>
+                                        <td> <a href="{{ route('post.edit', $item->id) }}" class="btn btn-primary btn-sm"
+                                                title="Edit">
+                                                <i class="fas fa-edit"></i>
+                                            </a>
+                                @endif
+                                </td>
+                                </tr>
                                 @endforeach
                             </tbody>
 

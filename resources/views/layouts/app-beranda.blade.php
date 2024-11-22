@@ -70,9 +70,15 @@
                                                         href="{{ route('home.BeritaKategori', $item->KategoriID) }}">{{ $item->Nama }}</a>
                                                 </li>
                                             @endforeach
-
                                         </ul>
                                     </nav>
+                                </div>
+                            </div>
+
+                            <!-- Login Button -->
+                            <div class="col-xl-2 col-lg-2 d-none d-lg-block">
+                                <div class="login-button">
+                                    <a href="{{ route('login') }}" class="btn btn-primary">Tulis Berita</a>
                                 </div>
                             </div>
 
@@ -83,6 +89,31 @@
                         </div>
                     </div>
                 </div>
+
+                <style>
+                    .header-flex {
+                        display: flex;
+                        align-items: center;
+                        justify-content: space-between;
+                    }
+
+                    .login-button {
+                        text-align: right;
+                    }
+
+                    /* .btn-primary {
+                        background-color: #007bff;
+                        color: #fff;
+                        padding: 10px 20px;
+                        border-radius: 5px;
+                        text-decoration: none;
+                    } */
+
+                    .btn-primary:hover {
+                        background-color: #0056b3;
+                    }
+                </style>
+
             </div>
         </div>
         <!-- Header End -->

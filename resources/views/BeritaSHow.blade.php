@@ -38,16 +38,16 @@
                             <h4 class="mb-30">Komentar</h4>
                             @forelse($data->getKomen as $comment)
                                 <div class="comment-list">
-                                    <div class="single-comment justify-content-between d-flex mb-30">
+                                    <div class="single-comment justify-content-between d-flex mb-20">
                                         <div class="user justify-content-between d-flex">
                                             <div class="desc">
                                                 <div class="d-flex justify-content-between">
                                                     <div class="d-flex align-items-center">
-                                                        <h5>{{ $comment->Nama }}</h5>
+                                                        <h5 class="comment-author">{{ $comment->Nama }}</h5>
                                                         <p class="date">{{ $comment->created_at->format('d M, Y') }}</p>
                                                     </div>
                                                 </div>
-                                                <p class="comment">
+                                                <p class="comment-text">
                                                     {{ $comment->Komentar }}
                                                 </p>
                                             </div>
@@ -58,6 +58,56 @@
                                 <p>No comments yet. Be the first to comment!</p>
                             @endforelse
                         </div>
+
+                        <style>
+                            .comments-area {
+                                background-color: #f9f9f9;
+                                padding: 20px;
+                                border-radius: 10px;
+                                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                            }
+
+                            .comment-list {
+                                margin-bottom: 1px;
+                                /* Mengurangi jarak antar komentar */
+                            }
+
+                            .single-comment {
+                                background-color: #fff;
+                                padding: 15px;
+                                border-radius: 8px;
+                                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+                                transition: transform 0.3s ease;
+                            }
+
+                            .single-comment:hover {
+                                transform: translateY(-5px);
+                            }
+
+                            .comment-author {
+                                font-size: 16px;
+                                font-weight: bold;
+                                margin-right: 10px;
+                            }
+
+                            .date {
+                                font-size: 14px;
+                                color: #777;
+                            }
+
+                            .comment-text {
+                                font-size: 14px;
+                                color: #333;
+                                margin-top: 10px;
+                                line-height: 1.6;
+                            }
+
+                            .comment-author,
+                            .date {
+                                margin-bottom: 5px;
+                            }
+                        </style>
+
                         <div class="row">
                             <div class="col-lg-12">
                                 <form class="form-contact contact_form mb-80" action="{{ route('komentar.store') }}"
