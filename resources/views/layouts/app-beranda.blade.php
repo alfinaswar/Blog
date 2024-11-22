@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>AZ Berita </title>
+    <title>Tax-Finance Services </title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="manifest" href="site.webmanifest">
@@ -57,7 +57,8 @@
                             <div class="col-xl-10 col-lg-10 col-md-12 header-flex">
                                 <!-- sticky -->
                                 <div class="sticky-logo">
-                                    <a href="index.html"><img src="{{ asset('') }}assets-berita/img/logo/logo.png"
+                                    <a href="index.html"><img
+                                            src="{{ asset('') }}assets-berita/img/logo/logoberanda.png"
                                             alt=""></a>
                                 </div>
                                 <!-- Main-menu -->
@@ -119,28 +120,7 @@
 
 
 
-        <div class="pagination-area pb-45 text-center">
-            <div class="container">
-                <div class="row">
-                    <div class="col-xl-12">
-                        <div class="single-wrap d-flex justify-content-center">
-                            <nav aria-label="Page navigation example">
-                                <ul class="pagination justify-content-start">
-                                    <li class="page-item"><a class="page-link" href="#"><span
-                                                class="flaticon-arrow roted"></span></a></li>
-                                    <li class="page-item active"><a class="page-link" href="#">01</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">02</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">03</a></li>
-                                    <li class="page-item"><a class="page-link" href="#"><span
-                                                class="flaticon-arrow right-arrow"></span></a></li>
-                                </ul>
-                            </nav>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- End pagination  -->
+
     </main>
 
     <footer>
@@ -153,90 +133,32 @@
                             <div class="single-footer-caption">
                                 <!-- logo -->
                                 <div class="footer-logo">
-                                    <a href="index.html"><img
-                                            src="{{ asset('') }}assets-berita/img/logo/logo2_footer.png"
-                                            alt=""></a>
+                                    <a href="#"><img src="{{ asset('assets-berita/img/logo/logoberanda.png') }}"
+                                            alt="" style="background-color: white;"></a>
                                 </div>
                                 <div class="footer-tittle">
                                     <div class="footer-pera">
-                                        <p>Suscipit mauris pede for con sectetuer sodales adipisci for cursus fames
-                                            lectus tempor da blandit gravida sodales Suscipit mauris pede for con
-                                            sectetuer sodales adipisci for cursus fames lectus tempor da blandit gravida
-                                            sodales Suscipit mauris pede for sectetuer.</p>
+                                        <p>Portal Berita Membahasa Seputar Keuangan dan Pajak, artikal unggulan di
+                                            publikasikan oleh penulis ternama dan terepcaya</p>
                                     </div>
                                 </div>
                                 <!-- social -->
-                                <div class="footer-social">
-                                    <a href="#"><i class="fab fa-twitter"></i></a>
-                                    <a href="#"><i class="fab fa-instagram"></i></a>
-                                    <a href="#"><i class="fab fa-pinterest-p"></i></a>
-                                </div>
+
                             </div>
                         </div>
                     </div>
                     <div class="col-xl-3 col-lg-3 col-md-4  col-sm-6">
                         <div class="single-footer-caption mt-60">
                             <div class="footer-tittle">
-                                <h4>Newsletter</h4>
-                                <p>Heaven fruitful doesn't over les idays appear creeping</p>
+                                <h4>Tentang kami</h4>
+                                <p>Tax-finance adalah website berita terpercaya yang berkantor di Menara Kompas Lantai
+                                    5, Jalan Palmerah Selatan 21, Jakarta Pusat, DKI Jakarta, Indonesia, 10270.</p>
                                 <!-- Form -->
-                                <div class="footer-form">
-                                    <div id="mc_embed_signup">
-                                        <form target="_blank"
-                                            action="https://spondonit.us12.list-manage.com/subscribe/post?u=1462626880ade1ac87bd9c93a&amp;id=92a4423d01"
-                                            method="get" class="subscribe_form relative mail_part">
-                                            <input type="email" name="email" id="newsletter-form-email"
-                                                placeholder="Email Address" class="placeholder hide-on-focus"
-                                                onfocus="this.placeholder = ''"
-                                                onblur="this.placeholder = ' Email Address '">
-                                            <div class="form-icon">
-                                                <button type="submit" name="submit" id="newsletter-submit"
-                                                    class="email_icon newsletter-submit button-contactForm"><img
-                                                        src="{{ asset('') }}assets-berita/img/logo/form-iocn.png"
-                                                        alt=""></button>
-                                            </div>
-                                            <div class="mt-10 info"></div>
-                                        </form>
-                                    </div>
-                                </div>
+
                             </div>
                         </div>
                     </div>
-                    <div class="col-xl-3 col-lg-3 col-md-5 col-sm-6">
-                        <div class="single-footer-caption mb-50 mt-60">
-                            <div class="footer-tittle">
-                                <h4>Instagram Feed</h4>
-                            </div>
-                            <div class="instagram-gellay">
-                                <ul class="insta-feed">
-                                    <li><a href="#"><img
-                                                src="{{ asset('') }}assets-berita/img/post/instra1.jpg"
-                                                alt=""></a>
-                                    </li>
-                                    <li><a href="#"><img
-                                                src="{{ asset('') }}assets-berita/img/post/instra2.jpg"
-                                                alt=""></a>
-                                    </li>
-                                    <li><a href="#"><img
-                                                src="{{ asset('') }}assets-berita/img/post/instra3.jpg"
-                                                alt=""></a>
-                                    </li>
-                                    <li><a href="#"><img
-                                                src="{{ asset('') }}assets-berita/img/post/instra4.jpg"
-                                                alt=""></a>
-                                    </li>
-                                    <li><a href="#"><img
-                                                src="{{ asset('') }}assets-berita/img/post/instra5.jpg"
-                                                alt=""></a>
-                                    </li>
-                                    <li><a href="#"><img
-                                                src="{{ asset('') }}assets-berita/img/post/instra6.jpg"
-                                                alt=""></a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
+
                 </div>
             </div>
         </div>
@@ -251,9 +173,7 @@
                                     Copyright &copy;
                                     <script>
                                         document.write(new Date().getFullYear());
-                                    </script> All rights reserved | This template is made with <i
-                                        class="ti-heart" aria-hidden="true"></i> by <a href="https://colorlib.com"
-                                        target="_blank">Colorlib</a>
+                                    </script> All rights reserved
                                     <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                                 </p>
                             </div>

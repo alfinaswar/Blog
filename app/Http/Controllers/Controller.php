@@ -36,8 +36,8 @@ class Controller extends BaseController
         $random = Post::with('getPenulis', 'getKategori')->inRandomOrder()->take(3)->get();
         $editor = Post::with('getPenulis', 'getKategori')->where('Tipe', 'PilihanEditor')->latest()->get()->take(6);
 
-        $data = Post::where('id', $id)->get();
-        return view('BeritaSHow', compact('kategori', 'latestartikel', 'recent', 'random', 'editor'));
+        $data = Post::with('getPenulis', 'getKategori', 'getKomen')->where('id', $id)->first();
+        return view('BeritaSHow', compact('kategori', 'latestartikel', 'recent', 'random', 'editor', 'data'));
         // return view('BeritaSHow', compact('data'));
     }
 }

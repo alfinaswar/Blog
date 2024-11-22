@@ -30,7 +30,7 @@
         <div class="browse-job login-style3">
             <!-- Coming Soon -->
             <div class="bg-img-fix overflow-hidden"
-                style="background-image:url({{ asset('') }}assets/images/background/bg21.png); object-fit:cover;">
+                style="background-image:url({{ asset('') }}assets/images/background/loginbg.jpg); object-fit:cover; width:auto;">
                 <div class="row gx-0">
                     <div class="col-xl-4 col-lg-5 col-md-6 col-sm-12 vh-100 bg-white ">
                         <div id="mCSB_1" class="mCustomScrollBox mCS-light mCSB_vertical mCSB_inside"
@@ -103,15 +103,7 @@
                                             </div>
                                         </nav>
                                     </div>
-                                    <div class="card-footer">
-                                        <div class=" bottom-footer clearfix m-t10 m-b20 row text-center">
-                                            <div class="col-lg-12 text-center">
-                                                <span> © Copyright by <span class="heart"></span>
-                                                    <a href="javascript:void(0);">Digital Indonesia Hebat </a> All
-                                                    rights reserved.</span>
-                                            </div>
-                                        </div>
-                                    </div>
+
 
                                 </div>
                             </div>

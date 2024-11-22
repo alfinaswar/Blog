@@ -20,4 +20,8 @@ class Post extends Model
     {
         return $this->hasOne(Kategori::class, 'KategoriID', 'Kategori');
     }
+    public function getKomen()
+    {
+        return $this->hasMany(Komentar::class, 'IDBerita', 'id');
+    }
 }
